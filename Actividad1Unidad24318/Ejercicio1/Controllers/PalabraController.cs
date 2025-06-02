@@ -7,8 +7,8 @@ namespace Ejercicio1.Controllers
     [ApiController]
     public class PalabraController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get(string oracion)
+        [HttpGet("Contar")]
+        public IActionResult Contar(string oracion)
         {
             if (string.IsNullOrEmpty(oracion))
             {
@@ -19,5 +19,18 @@ namespace Ejercicio1.Controllers
 
             return Ok(palabras.Count());
         }
+        [HttpGet("Invertir")]
+        public IActionResult Invetir(string oracion)
+        {
+            if (string.IsNullOrEmpty(oracion))
+            {
+                return BadRequest("La oración no puede estar vacía.");
+            }
+            var palabras = oracion.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            Array.Reverse(palabras);
+            return Ok(string.Join(" ", palabras));
+        }
+
+
     }
 }
